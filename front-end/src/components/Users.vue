@@ -3,12 +3,13 @@
   <div>
     <div class="row">
       <div>
-        <table class="table table-hover table-striped">
+        <table class="table table-hover table-striped align-center">
           <thead class="dark">
             <tr>
               <th scope="col">Id</th>
               <th scope="col">Name</th>
               <th scope="col">Email</th>
+              <th scope="col">Gender</th>
               <th>Operation</th>
             </tr>
           </thead>
@@ -17,7 +18,8 @@
               <td scope="row">{{ user.id }}</td>
               <td scope="row">{{ user.name }}</td>
               <td scope="row">{{ user.email }}</td>
-              <td scope="row"><button type="button" class="btn btn-danger btn-sm" @click="deleteaUser(user.id)">Delete</button><button type="button" class="btn btn-secondary btn-sm">Edit</button></td>
+              <td scope="row">{{ user.gender }}</td>
+              <td scope="row"><div><button type="button" class="btn btn-danger btn-sm" @click="deleteaUser(user.id)">Delete</button><button type="button" class="btn btn-secondary btn-sm">Edit</button></div></td>
               <!-- <td scope="row">Operation</td> -->
             </tr>
           </tbody>

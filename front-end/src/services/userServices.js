@@ -9,7 +9,7 @@ export async function createUsers (data) {
   const response = await fetch('http://localhost:8000/api/user', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({name: data.name, email: data.email})
+    body: JSON.stringify({name: data.name, email: data.email, gender: data.gender})
   })
   return response
 }
