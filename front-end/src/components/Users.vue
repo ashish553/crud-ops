@@ -1,6 +1,6 @@
 /* eslint-disable vue/require-v-for-key */
 <template>
-  <div class="container">
+  <div>
     <div class="row">
       <div>
         <table class="table table-hover table-striped">
