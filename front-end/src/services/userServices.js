@@ -20,3 +20,12 @@ export async function deleteUser (id) {
   })
   return response
 }
+
+export async function updateUser (data) {
+  const response = await fetch('http://localhost:8000/api/user', {
+    method: 'PUT',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({name: data.name, email: data.email, gender: data.gender, id: data.id})
+  })
+  return response.status
+}

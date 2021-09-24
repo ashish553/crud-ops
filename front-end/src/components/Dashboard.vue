@@ -2,7 +2,7 @@
     <div class="container">
       <div class='row'>
         <Header></Header>
-        <Users @deleteaUser="userDelete($event)" v-if="u.length>0" :myusers="u"/>
+        <Users @deleteaUser="userDelete($event)" @updateUser="userUpdate($event)" v-if="u.length>0" :myusers="u" :fail="checkStatus"/>
         <CreateUser @createUser="userCreate($event)"/>
       </div>
     </div>
@@ -10,7 +10,7 @@
 
 <script>
 
-import { getAllUsers, createUsers, deleteUser } from '../services/userServices'
+import { getAllUsers, createUsers, deleteUser, updateUser } from '../services/userServices'
 import CreateUser from './CreateUser.vue'
 import Users from './Users.vue'
 import Header from './Header.vue'
@@ -24,7 +24,8 @@ export default {
   },
   data () {
     return {
-      u: []
+      u: [],
+      checkStatus: false
     }
   },
   methods: {
@@ -41,8 +42,14 @@ export default {
     },
     userDelete (data) {
       deleteUser(data).then(res => {
-        // console.log(data)
       })
+      this.getAllUsers()
+    },
+    async userUpdate (data) {
+      const statusCode = await updateUser(data).then()
+      if (statusCode === 201) {
+        this.checkStatus = true
+      }
       this.getAllUsers()
     }
   },

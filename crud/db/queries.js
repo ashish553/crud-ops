@@ -50,9 +50,21 @@ const deleteUser = (req,res) => {
     })
 }
 
+const updateUser = (req,res) => {
+    const {name,email,gender,id} = req.body
+    // const id = req.params
+    pool.query('UPDATE users SET name=$1, email=$2, gender=$3 WHERE id=$4',[name,email,gender,id],(err,results)=>{
+        if(err){
+            throw err
+        }
+        res.status(201).send('Update Successfull')
+    })
+}
+
 module.exports = {
     getUsers,
     getUsersById,
     createUser,
-    deleteUser
+    deleteUser,
+    updateUser
 }

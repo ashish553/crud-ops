@@ -16,6 +16,7 @@ app.use(express.static(path.join(__dirname+'../my-app/public')))
 app.get('/api/users',query.getUsers)
 app.post('/api/user',query.createUser)
 app.delete('/api/user/:id',query.deleteUser)
+app.put('/api/user',query.updateUser)
 
 //Route for dashboard
 app.get('/',(req,res)=>{
