@@ -1,7 +1,10 @@
 <template>
-    <div>
+    <div class="container">
+      <div class='row'>
+        <Header></Header>
         <Users @deleteaUser="userDelete($event)" v-if="u.length>0" :myusers="u"/>
         <CreateUser @createUser="userCreate($event)"/>
+      </div>
     </div>
 </template>
 
@@ -10,12 +13,14 @@
 import { getAllUsers, createUsers, deleteUser } from '../services/userServices'
 import CreateUser from './CreateUser.vue'
 import Users from './Users.vue'
+import Header from './Header.vue'
 
 export default {
   name: 'Dashboard',
   components: {
     CreateUser,
-    Users
+    Users,
+    Header
   },
   data () {
     return {
@@ -35,7 +40,10 @@ export default {
       })
     },
     userDelete (data) {
-      deleteUser(data).then(res => console.log(res))
+      deleteUser(data).then(res => {
+        // console.log(data)
+      })
+      this.getAllUsers()
     }
   },
   mounted () {

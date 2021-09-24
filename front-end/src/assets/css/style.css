@@ -9,3 +9,7 @@
 .align-center{
     text-align: center;
 }
+.modal-backdrop {
+    width: 141vw !important;
+    height: 141vh !important;
+}
