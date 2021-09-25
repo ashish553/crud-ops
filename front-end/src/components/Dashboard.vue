@@ -2,7 +2,7 @@
     <div class="container">
       <div class='row'>
         <Header></Header>
-        <Users @deleteaUser="userDelete($event)" @updateUser="userUpdate($event)" v-if="u.length>0" :myusers="u" :fail="checkStatus"/>
+        <Users @hideModal="changeVisible($event)" @deleteaUser="userDelete($event)" @updateUser="userUpdate($event)" v-if="u.length>0" :myusers="u" :duration="checkStatus"/>
         <CreateUser @createUser="userCreate($event)"/>
       </div>
     </div>
@@ -25,7 +25,7 @@ export default {
   data () {
     return {
       u: [],
-      checkStatus: false
+      checkStatus: 0
     }
   },
   methods: {
@@ -46,11 +46,15 @@ export default {
       this.getAllUsers()
     },
     async userUpdate (data) {
+      this.checkStatus = 0
       const statusCode = await updateUser(data).then()
       if (statusCode === 201) {
-        this.checkStatus = true
+        this.checkStatus = 1
       }
       this.getAllUsers()
+    },
+    changeVisible (data) {
+      this.checkStatus = data
     }
   },
   mounted () {

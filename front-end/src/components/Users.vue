@@ -18,7 +18,7 @@
                 <td>{{ user.name }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.gender }}</td>
-                <td><div><button type="button" class="btn btn-danger btn-sm" @click="deleteaUser(user.id)">Delete</button><button type="button" @click="$bvModal.show('bv-modal-example'),setID(user.id,user.name,user.email,user.gender)" class="btn btn-secondary btn-sm">Edit</button></div></td>
+                <td><div><button type="button" class="btn btn-danger btn-sm" @click="deleteaUser(user.id)">Delete</button><button type="button" @click="$bvModal.show('bv-modal-example'),setID(user.id,user.name,user.email,user.gender),hideModal()" class="btn btn-secondary btn-sm">Edit</button></div></td>
               </tr>
             </tbody>
           </table>
@@ -42,13 +42,10 @@
                 <option value="Female">Female</option>
                 <option value="Other">Others</option>
               </select>
+              <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')">Close Me</b-button>
+              <b-button class="mt-3" block @click="updateUser()">Update</b-button>
             </div>
-            <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')">Close Me</b-button>
-            <b-button class="mt-3" block @click="updateUser()">Update</b-button>
-            <b-alert class="mt-4" v-if="fail" :show=5 variant="success"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16">
-  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-  <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
-</svg> Details Updated Successfully!</b-alert>
+             <b-alert class="mt-4 align-center" :show="duration" variant="success" fade><b-icon icon="check-circle-fill" aria-hidden="true"></b-icon> Details Updated Successfully!</b-alert>
           </b-modal>
         </div>
       </div>
@@ -59,13 +56,14 @@
 
 export default {
   name: 'Users',
-  props: ['myusers', 'fail'],
+  props: ['myusers', 'duration'],
   data () {
     return {
       name: '',
       email: '',
       gender: '',
-      id: ''
+      id: '',
+      modalVisibility: 0
     }
   },
   methods: {
@@ -87,10 +85,13 @@ export default {
           id: this.id
         }
         this.$emit('updateUser', updatedData)
-        this.name = ''
-        this.email = ''
-        this.gender = ''
+        // this.name = ''
+        // this.email = ''
+        // this.gender = ''
       }
+    },
+    hideModal () {
+      this.$emit('hideModal', this.modalVisibility)
     }
   }
 }
@@ -122,5 +123,14 @@ height: 350px
   text-align: -webkit-center;
   width:90%;
   margin-top:10px
+}
+.alert-success{
+  top: -125%;
+  max-width: 288px;
+  margin: auto;
+  padding: 3px !important;
+}
+#bv-modal-example___BV_modal_body_{
+  height: 310px !important;
 }
 </style>
