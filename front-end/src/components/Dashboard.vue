@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
       <div class='row'>
         <Header></Header>
         <Users @hideModal="changeVisible($event)" @deleteaUser="userDelete($event)" @updateUser="userUpdate($event)" v-if="u.length>0" :myusers="u" :duration="checkStatus"/>

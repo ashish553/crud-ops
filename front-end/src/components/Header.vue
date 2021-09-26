@@ -1,5 +1,5 @@
 <template>
-  <div class="container background-d">
+  <div class="background-d">
     <div class="row bg-style">
       <div>
         <h1>CRUD Operations</h1>

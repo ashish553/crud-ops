@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="row form-group justify-content-center mb-2">
-      <div class="col-md-4 col-sm-4 col-10">
+    <div class="row form-group mb-2">
+      <div class="col-md-4 col-sm-4 col-10 align-left">
         <label for="nameInput" class="form-label mt-4">Name</label>
         <input type="text" name="name" id="name" class="form-control form-select-sm" placeholder="Steve Jobs" v-model="name">
         <label for="emailInput" class="form-label mt-3">Email</label>
@@ -20,7 +20,7 @@
           <div v-if="fail" class="align-center alert alert-danger d-flex align-items-center" role="alert">
             <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
             <div>
-              Please enter all field correctly
+              <b-icon icon="x-circle-fill" aria-hidden="true"></b-icon>  Please enter all field correctly
             </div>
           </div>
         </div>

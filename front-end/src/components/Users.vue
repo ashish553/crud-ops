@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-      <div class="row table-container">
+  <div>
+      <div class="row table-container mt-2">
         <div class="table-wrapper-scroll-y my-custom-scrollbar">
           <table class="table table-bordered table-hover table-striped mb-0">
             <thead class="dark">

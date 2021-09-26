@@ -4,12 +4,26 @@
     /* border: 2px rgb(129, 122, 122) solid; */
 /* } */
 .btn{
-    margin: 5px;
+  margin: 5px;
 }
 .align-center{
-    text-align: center;
+  text-align: center;
+}
+.align-left{
+  text-align: left;
+}
+.align-right{
+  text-align: right;
 }
 .modal-backdrop {
-    width: 141vw !important;
-    height: 141vh !important;
+  width: 141vw !important;
+  height: 141vh !important;
+}
+.form-control{
+  border-radius: 1rem;
+  border: 1px solid #abb0b4;
+}
+.form-select{
+  border-radius: 1rem;
+  border: 1px solid #abb0b4;
 }
