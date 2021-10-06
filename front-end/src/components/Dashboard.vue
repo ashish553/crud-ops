@@ -1,9 +1,11 @@
 <template>
-    <div>
+    <div class="container">
       <div class='row'>
         <Header></Header>
-        <Users @hideModal="changeVisible($event)" @deleteaUser="userDelete($event)" @updateUser="userUpdate($event)" v-if="u.length>0" :myusers="u" :duration="checkStatus"/>
+      </div>
+      <div class="row custom-table-cont">
         <CreateUser @createUser="userCreate($event)"/>
+        <Users @hideModal="changeVisible($event)" @deleteaUser="userDelete($event)" @updateUser="userUpdate($event)" v-if="u.length>0" :myusers="u" :duration="checkStatus"/>
       </div>
     </div>
 </template>
@@ -65,5 +67,10 @@ export default {
 </script>
 
 <style>
-
+.custom-table-cont{
+  padding: 10px;
+    border: 2px grey solid;
+    border-radius: 10px;
+    margin-top: 20px;
+}
 </style>

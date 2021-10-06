@@ -31,12 +31,12 @@ const getUsersById = (req,res)=>{
 }
 
 const createUser = (req,res)=>{
-    const { name,email,gender } = req.body
-    pool.query('INSERT INTO users (name,email,gender) VALUES ($1, $2, $3)',[name,email,gender],(err,results)=>{
+    const { projectname,sitename,siteurl,gender,normal,disruption,responsetime } = req.body
+    pool.query('INSERT INTO users (projectname,sitename,gender,siteurl,normal,disruption,responsetime) VALUES ($1, $2, $3, $4, $5, $6, $7)',[projectname,sitename,gender,siteurl,parseInt(normal),parseInt(disruption),parseInt(responsetime)],(err,results)=>{
         if(err){
             throw err
         }
-        res.status(201).send(`User added with ID: ${name}`)
+        res.status(201).send(`User added with ID: ${projectname}`)
     })
 }
 
@@ -51,9 +51,9 @@ const deleteUser = (req,res) => {
 }
 
 const updateUser = (req,res) => {
-    const {name,email,gender,id} = req.body
+    const {projectname,sitename,gender,id,siteurl,normal,disruption,responsetime} = req.body
     // const id = req.params
-    pool.query('UPDATE users SET name=$1, email=$2, gender=$3 WHERE id=$4',[name,email,gender,id],(err,results)=>{
+    pool.query('UPDATE users SET projectname=$1, sitename=$2, gender=$3, siteurl=$4, normal=$6, disruption=$7, responsetime=$8 WHERE id=$5',[projectname,sitename,gender,siteurl,id,parseInt(normal),parseInt(disruption),parseInt(responsetime)],(err,results)=>{
         if(err){
             throw err
         }

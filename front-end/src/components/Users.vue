@@ -6,19 +6,25 @@
             <thead class="dark">
               <tr>
                 <th>Id</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Gender</th>
+                <th>Project Name</th>
+                <th>Site Name</th>
+                <th>Site URL</th>
+                <th>Normal(%)</th>
+                <th>Disruption(%)</th>
+                <th>Response Time(ms)</th>
                 <th>Operation</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="user in myusers" :key="user.id">
                 <td>{{ user.id }}</td>
-                <td>{{ user.name }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.gender }}</td>
-                <td><div><button type="button" class="btn btn-danger btn-sm" @click="deleteaUser(user.id)">Delete</button><button type="button" @click="$bvModal.show('bv-modal-example'),setID(user.id,user.name,user.email,user.gender),hideModal()" class="btn btn-secondary btn-sm">Edit</button></div></td>
+                <td>{{ user.projectname }}</td>
+                <td>{{ user.sitename }}</td>
+                <td>{{ user.siteurl }}</td>
+                <td>{{ user.normal }}</td>
+                <td>{{ user.disruption }}</td>
+                <td>{{ user.responsetime }}</td>
+                <td><div><button type="button" class="btn btn-danger btn-sm" @click="deleteaUser(user.id)">Delete</button><button type="button" @click="$bvModal.show('bv-modal-example'),setID(user.id,user.projectname,user.sitename,user.gender,user.siteurl,user.normal,user.disruption,user.responsetime),hideModal()" class="btn btn-secondary btn-sm">Edit</button></div></td>
               </tr>
             </tbody>
           </table>
@@ -31,10 +37,10 @@
               Edit Details
             </template>
             <div class="d-block">
-              <label for="nameInput" class="form-label">Name</label>
-              <input type="text" name="name" id="name" class="form-control form-select-sm" placeholder="Steve Jobs" v-model="name">
-              <label for="nameInput" class="form-label mt-3">Email</label>
-              <input type="text" name="email" id="email" class="form-control form-select-sm" placeholder="steve@appleinc.com" v-model="email">
+              <label for="projectnameInput" class="form-label">Project Name</label>
+              <input type="text" name="projectname" id="projectname" class="form-control form-select-sm" placeholder="Steve Jobs" v-model="projectname">
+              <label for="nameInput" class="form-label mt-3">Sitename</label>
+              <input type="text" name="sitename" id="sitename" class="form-control form-select-sm" placeholder="steve@appleinc.com" v-model="sitename">
               <label for="genderInput" class="mt-3 form-label">Gender</label>
               <select name="gender" id="gender" class="form-select form-select-sm" v-model="gender">
                 <option selected>Select an option</option>
@@ -42,10 +48,18 @@
                 <option value="Female">Female</option>
                 <option value="Other">Others</option>
               </select>
+              <label for="siteURL" class="mt-3 form-label">Site URL</label>
+              <input type="text" id="siteurl" class="form-control form-select-sm" v-model="siteurl">
+              <label for="normal" class="form-label mt-3">Normal(%)</label>
+              <input type="number" class="form-control form-select-sm" v-model="normal">
+              <label for="disruption" class="form-label mt-3">Disruption(%)</label>
+              <input type="number" class="form-control form-select-sm" v-model="disruption">
+              <label for="responsetime" class="form-label mt-3">Response Time(ms)</label>
+              <input type="number" class="form-control form-select-sm" v-model="responsetime">
               <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')">Close Me</b-button>
               <b-button class="mt-3" block @click="updateUser()">Update</b-button>
             </div>
-             <b-alert class="mt-4 align-center" :show="duration" variant="success" fade><b-icon icon="check-circle-fill" aria-hidden="true"></b-icon> Details Updated Successfully!</b-alert>
+            <b-alert class="mt-4 align-center alert-success" :show="duration" variant="success" fade><b-icon icon="check-circle-fill" aria-hidden="true"></b-icon> Details Updated Successfully!</b-alert>
           </b-modal>
         </div>
       </div>
@@ -59,10 +73,14 @@ export default {
   props: ['myusers', 'duration'],
   data () {
     return {
-      name: '',
-      email: '',
+      projectname: '',
+      sitename: '',
+      siteurl: '',
       gender: '',
       id: '',
+      normal: '',
+      disruption: '',
+      responsetime: '',
       modalVisibility: 0
     }
   },
@@ -70,23 +88,31 @@ export default {
     deleteaUser (idUser) {
       this.$emit('deleteaUser', idUser)
     },
-    setID (id, name, email, gender) {
+    setID (id, projectname, sitename, gender, siteurl, normal, disruption, responsetime) {
       this.id = id
-      this.name = name
-      this.email = email
+      this.projectname = projectname
+      this.sitename = sitename
       this.gender = gender
+      this.siteurl = siteurl
+      this.normal = normal
+      this.disruption = disruption
+      this.responsetime = responsetime
     },
     updateUser () {
-      if (this.name !== '' && this.email !== '' && this.gender !== '') {
+      if (this.projectname !== '' && this.sitename !== '' && this.siteurl !== '' && this.gender !== '') {
         const updatedData = {
-          name: this.name,
-          email: this.email,
+          projectname: this.projectname,
+          siteurl: this.siteurl,
+          sitename: this.sitename,
           gender: this.gender,
-          id: this.id
+          id: this.id,
+          normal: this.normal,
+          disruption: this.disruption,
+          responsetime: this.responsetime
         }
         this.$emit('updateUser', updatedData)
-        // this.name = ''
-        // this.email = ''
+        // this.projectname = ''
+        // this.sitename = ''
         // this.gender = ''
       }
     },
@@ -98,7 +124,7 @@ export default {
 </script>
 
 <style>
-.my-custom-scrollbar {
+/* .my-custom-scrollbar {
 position: relative;
 height: 300px;
 overflow: auto;
@@ -124,13 +150,33 @@ height: 350px
   width:90%;
   margin-top:10px
 }
+.box-header{
+  padding: 10px;
+} */
+#bv-modal-example___BV_modal_content_{
+  height: 680px !important;
+}
 .alert-success{
-  top: -125%;
+  top: -620px;
   max-width: 288px;
   margin: auto;
   padding: 3px !important;
 }
-#bv-modal-example___BV_modal_body_{
-  height: 310px !important;
+.table-container{
+  border: 2px #b1adad solid;
+  background-color: #d7ecff;
+  /* box-shadow: 0px 4px 10px 0px; */
+}
+.table-hover{
+  --bs-table-hover-bg: #aef1bd !important;
+}
+.my-custom-scrollbar {
+position: relative;
+height: 300px;
+overflow: auto;
+}
+.table-wrapper-scroll-y {
+display: block;
+height: 350px
 }
 </style>
