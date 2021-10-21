@@ -42,7 +42,42 @@
             <input type="number" class="form-control form-select-sm" v-model="disruption">
             <label for="responseTime" class="mt-3 form-label">Response Time (ms)</label>
             <input type="number" class="form-control form-select-sm" v-model="responsetime">
-            <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-createUser')">Close Me</b-button>
+            <div class="custom-switch mt-4">
+              <label class="switch">
+                <input type="checkbox" checked v-model="availability">
+                <span class="slider round"></span>
+              </label>
+              <p>Website Availability Service</p>
+            </div>
+            <div class="custom-switch mt-4">
+              <label class="switch">
+                <input type="checkbox" checked v-model="ssl">
+                <span class="slider round"></span>
+              </label>
+              <p>SSL Service</p>
+            </div>
+            <div class="custom-switch mt-4">
+              <label class="switch">
+                <input type="checkbox" checked v-model="broken">
+                <span class="slider round"></span>
+              </label>
+              <p>Broken Link Service</p>
+            </div>
+            <div class="custom-switch mt-4">
+              <label class="switch">
+                <input type="checkbox" checked v-model="dynamic">
+                <span class="slider round"></span>
+              </label>
+              <p>Is Dynamic Checking Required</p>
+            </div>
+            <div class="custom-switch mt-4">
+              <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider round"></span>
+              </label>
+              <p>Raise Incident if Webiste is down</p>
+            </div>
+            <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-createUser')">Close</b-button>
             <b-button class="mt-3" block @click="createUsers()">Add</b-button>
           </div>
             <!-- <b-alert class="mt-4 align-center" :show="duration" variant="success" fade><b-icon icon="check-circle-fill" aria-hidden="true"></b-icon> Details Updated Successfully!</b-alert> -->
@@ -65,6 +100,10 @@ export default {
       normal: '',
       disruption: '',
       responsetime: '',
+      availability: false,
+      dynamic: false,
+      ssl: false,
+      broken: false,
       fail: false
     }
   },
@@ -79,7 +118,11 @@ export default {
           gender: this.gender,
           normal: this.normal,
           disruption: this.disruption,
-          responsetime: this.responsetime
+          responsetime: this.responsetime,
+          availability: this.availability,
+          dynamic: this.dynamic,
+          ssl: this.ssl,
+          broken: this.broken
         }
         this.fail = false
         this.$emit('createUser', newUserData)
@@ -90,6 +133,11 @@ export default {
         this.gender = ''
         this.normal = ''
         this.responsetime = ''
+        this.availability = false
+        this.dynamic = false
+        this.ssl = false
+        this.broken = false
+        this.fail = false
       } else {
         this.fail = true
       }

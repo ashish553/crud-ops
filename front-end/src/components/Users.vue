@@ -2,7 +2,7 @@
   <div>
       <div class="row table-container mt-2">
         <div class="table-wrapper-scroll-y my-custom-scrollbar">
-          <table class="table table-bordered table-hover table-striped mb-0">
+          <table class="table table-bordered table-striped mb-0">
             <thead class="dark">
               <tr>
                 <th>Id</th>
@@ -24,7 +24,7 @@
                 <td>{{ user.normal }}</td>
                 <td>{{ user.disruption }}</td>
                 <td>{{ user.responsetime }}</td>
-                <td><div><button type="button" class="btn btn-danger btn-sm" @click="deleteaUser(user.id)">Delete</button><button type="button" @click="$bvModal.show('bv-modal-example'),setID(user.id,user.projectname,user.sitename,user.gender,user.siteurl,user.normal,user.disruption,user.responsetime),hideModal()" class="btn btn-secondary btn-sm">Edit</button></div></td>
+                <td><div><button type="button" class="btn btn-danger btn-sm" @click="deleteaUser(user.id)">Delete</button><button type="button" @click="$bvModal.show('bv-modal-example'),setID(user.id,user.projectname,user.sitename,user.gender,user.siteurl,user.normal,user.disruption,user.responsetime,user.availability,user.ssl,user.brokenlink,user.dynamic),hideModal()" class="btn btn-secondary btn-sm">Edit</button></div></td>
               </tr>
             </tbody>
           </table>
@@ -56,9 +56,44 @@
               <input type="number" class="form-control form-select-sm" v-model="disruption">
               <label for="responsetime" class="form-label mt-3">Response Time(ms)</label>
               <input type="number" class="form-control form-select-sm" v-model="responsetime">
-              <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')">Close Me</b-button>
-              <b-button class="mt-3" block @click="updateUser()">Update</b-button>
-            </div>
+              <div class="custom-switch mt-4">
+              <label class="switch">
+                <input type="checkbox" checked v-model="availability">
+                <span class="slider round"></span>
+              </label>
+              <p>Website Availability Service</p>
+              </div>
+              <div class="custom-switch mt-4">
+                <label class="switch">
+                  <input type="checkbox" checked v-model="ssl">
+                  <span class="slider round"></span>
+                </label>
+                <p>SSL Service</p>
+              </div>
+              <div class="custom-switch mt-4">
+                <label class="switch">
+                  <input type="checkbox" checked v-model="broken">
+                  <span class="slider round"></span>
+                </label>
+                <p>Broken Link Service</p>
+              </div>
+              <div class="custom-switch mt-4">
+                <label class="switch">
+                  <input type="checkbox" checked v-model="dynamic">
+                  <span class="slider round"></span>
+                </label>
+                <p>Is Dynamic Checking Required</p>
+              </div>
+              <div class="custom-switch mt-4">
+                <label class="switch">
+                  <input type="checkbox" checked>
+                  <span class="slider round"></span>
+                </label>
+                <p>Raise Incident if Webiste is down</p>
+              </div>
+                <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')">Close</b-button>
+                <b-button class="mt-3" block @click="updateUser()">Update</b-button>
+              </div>
             <b-alert class="mt-4 align-center alert-success" :show="duration" variant="success" fade><b-icon icon="check-circle-fill" aria-hidden="true"></b-icon> Details Updated Successfully!</b-alert>
           </b-modal>
         </div>
@@ -81,6 +116,10 @@ export default {
       normal: '',
       disruption: '',
       responsetime: '',
+      availability: false,
+      dynamic: false,
+      ssl: false,
+      broken: false,
       modalVisibility: 0
     }
   },
@@ -88,7 +127,7 @@ export default {
     deleteaUser (idUser) {
       this.$emit('deleteaUser', idUser)
     },
-    setID (id, projectname, sitename, gender, siteurl, normal, disruption, responsetime) {
+    setID (id, projectname, sitename, gender, siteurl, normal, disruption, responsetime, availability, ssl, dynamic, broken) {
       this.id = id
       this.projectname = projectname
       this.sitename = sitename
@@ -97,6 +136,10 @@ export default {
       this.normal = normal
       this.disruption = disruption
       this.responsetime = responsetime
+      this.availability = availability
+      this.ssl = ssl
+      this.dynamic = dynamic
+      this.broken = broken
     },
     updateUser () {
       if (this.projectname !== '' && this.sitename !== '' && this.siteurl !== '' && this.gender !== '') {
@@ -108,7 +151,11 @@ export default {
           id: this.id,
           normal: this.normal,
           disruption: this.disruption,
-          responsetime: this.responsetime
+          responsetime: this.responsetime,
+          availability: this.availability,
+          dynamic: this.dynamic,
+          ssl: this.ssl,
+          broken: this.broken
         }
         this.$emit('updateUser', updatedData)
         // this.projectname = ''
@@ -153,30 +200,39 @@ height: 350px
 .box-header{
   padding: 10px;
 } */
-#bv-modal-example___BV_modal_content_{
+/* #bv-modal-example___BV_modal_content_{
   height: 680px !important;
-}
+} */
 .alert-success{
   top: -620px;
   max-width: 288px;
   margin: auto;
   padding: 3px !important;
 }
-.table-container{
-  border: 2px #b1adad solid;
-  background-color: #d7ecff;
+.table-container th{
+  color: white;
+  background-color: rgb(7, 7, 36);
+  /* border: 2px #b1adad solid;
+  background-color: #d7ecff; */
   /* box-shadow: 0px 4px 10px 0px; */
 }
-.table-hover{
+/* .table-hover{
   --bs-table-hover-bg: #aef1bd !important;
-}
+} */
 .my-custom-scrollbar {
 position: relative;
 height: 300px;
 overflow: auto;
 }
+
 .table-wrapper-scroll-y {
 display: block;
 height: 350px
 }
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    --bs-table-accent-bg: rgb(226, 223, 219);
+    color: var(--bs-table-striped-color);
+}
+
 </style>
