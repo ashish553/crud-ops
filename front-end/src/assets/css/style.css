@@ -90,3 +90,35 @@ input:checked + .slider:before {
   display: block;
 }
 }
+
+.nav-bar-body{
+  height: 100%;
+  background-color: rgb(9 9 26);
+  color: #bbbbc1;
+  padding: 0px 4px 0px 4px;
+}
+/* .nav-items{
+  color: #bbbbc1;
+} */
+.nav-user-section, .nav-items, .nav-header{
+  padding: 5px;
+}
+.nav-header{
+  text-align: center;
+}
+
+.pdl-0{
+  padding-left: 0;
+}
+.user-image{
+  margin-top: 5px;
+  max-width: 40px;
+}
+.nav-items-name{
+  display: inline;
+  margin-left: 5px;
+}
+.nav-items a{
+  text-decoration: none;
+  color: #aabbb7;
+}

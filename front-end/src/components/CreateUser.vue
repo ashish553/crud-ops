@@ -8,7 +8,7 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          Show active site only
+          <p class="margin-custom">Show active site only</p>
         </b-form-checkbox>
       </div>
       <div class="align-right col-md-6 col-6 col-sm-6">
@@ -148,10 +148,13 @@ export default {
 
 <style>
 .custom-table-cont{
-  padding: 10px;
+  padding: 13px;
   border: 2px rgb(131, 126, 126) solid;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   margin-top: 20px;
-  box-shadow: 0px 4px 10px 0px;
+  /* box-shadow: 0px 4px 10px 0px; */
+}
+.margin-custom{
+  margin-left: 5px;
 }
 </style>

@@ -77,6 +77,13 @@
               <label for="responsetime" class="form-label mt-3">Response Time(ms)</label>
               <input type="number" class="form-control form-select-sm" v-model="responsetime">
               <div class="custom-switch mt-4">
+                <label class="switch">
+                  <input type="checkbox" checked v-model="dynamic">
+                  <span class="slider round"></span>
+                </label>
+                <p>Is Dynamic Checking Required</p>
+              </div>
+              <div class="custom-switch mt-4">
               <label class="switch">
                 <input type="checkbox" checked v-model="availability">
                 <span class="slider round"></span>
@@ -96,13 +103,6 @@
                   <span class="slider round"></span>
                 </label>
                 <p>Broken Link Service</p>
-              </div>
-              <div class="custom-switch mt-4">
-                <label class="switch">
-                  <input type="checkbox" checked v-model="dynamic">
-                  <span class="slider round"></span>
-                </label>
-                <p>Is Dynamic Checking Required</p>
               </div>
               <div class="custom-switch mt-4">
                 <label class="switch">
@@ -247,7 +247,7 @@ overflow: auto;
 
 .table-wrapper-scroll-y {
 display: block;
-height: 80%;
+height: 600px;
 }
 
 .table-striped>tbody>tr:nth-of-type(odd) {
