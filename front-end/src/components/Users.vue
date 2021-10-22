@@ -2,7 +2,7 @@
   <div>
       <div class="row table-container mt-2">
         <div class="table-wrapper-scroll-y my-custom-scrollbar">
-          <table class="table table-bordered table-striped mb-0">
+          <table class="table table-bordered table-striped mb-0 align-center">
             <thead class="dark">
               <tr>
                 <th>Id</th>
@@ -12,6 +12,10 @@
                 <th>Normal(%)</th>
                 <th>Disruption(%)</th>
                 <th>Response Time(ms)</th>
+                <th>Is Dynamic Testing required</th>
+                <th>Website Availability Service</th>
+                <th>SSL Service</th>
+                <th>Broken Link Service</th>
                 <th>Operation</th>
               </tr>
             </thead>
@@ -24,6 +28,22 @@
                 <td>{{ user.normal }}</td>
                 <td>{{ user.disruption }}</td>
                 <td>{{ user.responsetime }}</td>
+                <td>
+                  <img v-if="user.dynamic" src="../assets/img/check.png" alt="true">
+                  <img v-if="!user.dynamic" src="../assets/img/cancel.png" alt="false">
+                </td>
+                <td>
+                  <img v-if="user.availability" src="../assets/img/check.png" alt="true">
+                  <img v-if="!user.availability" src="../assets/img/cancel.png" alt="false">
+                </td>
+                <td>
+                  <img v-if="user.ssl" src="../assets/img/check.png" alt="true">
+                  <img v-if="!user.ssl" src="../assets/img/cancel.png" alt="false">
+                </td>
+                <td>
+                  <img v-if="user.brokenlink" src="../assets/img/check.png" alt="true">
+                  <img v-if="!user.brokenlink" src="../assets/img/cancel.png" alt="false">
+                </td>
                 <td><div><button type="button" class="btn btn-danger btn-sm" @click="deleteaUser(user.id)">Delete</button><button type="button" @click="$bvModal.show('bv-modal-example'),setID(user.id,user.projectname,user.sitename,user.gender,user.siteurl,user.normal,user.disruption,user.responsetime,user.availability,user.ssl,user.brokenlink,user.dynamic),hideModal()" class="btn btn-secondary btn-sm">Edit</button></div></td>
               </tr>
             </tbody>
@@ -227,12 +247,18 @@ overflow: auto;
 
 .table-wrapper-scroll-y {
 display: block;
-height: 350px
+height: 80%;
 }
 
 .table-striped>tbody>tr:nth-of-type(odd) {
     --bs-table-accent-bg: rgb(226, 223, 219);
     color: var(--bs-table-striped-color);
 }
-
+img{
+  max-width: 30px;
+  /* text-align: center; */
+}
+td{
+  vertical-align: middle;
+}
 </style>
