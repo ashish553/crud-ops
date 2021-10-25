@@ -10,7 +10,7 @@
           <div class="nav-bar-body">
             <div class="nav-header">
               <div class="mt-4">
-                <img src="../assets/img/health.png" alt="health logo">
+                <img src="../assets/img/health.png" class="icon-size" alt="health logo">
                 <p style="display:inline-block" class="mt-3">Website Health Monitoring</p>
               </div>
             </div>
@@ -124,5 +124,8 @@ export default {
     border: 2px grey solid;
     /* border-radius: 10px; */
     margin-top: 20px;
+}
+.icon-size{
+  width:30px;
 }
 </style>

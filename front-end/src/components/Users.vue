@@ -147,7 +147,7 @@ export default {
     deleteaUser (idUser) {
       this.$emit('deleteaUser', idUser)
     },
-    setID (id, projectname, sitename, gender, siteurl, normal, disruption, responsetime, availability, ssl, dynamic, broken) {
+    setID (id, projectname, sitename, gender, siteurl, normal, disruption, responsetime, availability, ssl, broken, dynamic) {
       this.id = id
       this.projectname = projectname
       this.sitename = sitename
