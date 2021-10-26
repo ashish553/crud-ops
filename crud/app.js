@@ -4,6 +4,7 @@ const app = express()
 const bodyparser = require('body-parser')
 const query = require('./db/queries')
 const cors = require('cors')
+const port = 8000
 
 app.use(bodyparser.json())
 app.use(cors())
@@ -24,6 +25,6 @@ app.get('/',(req,res)=>{
 })
 
 //Start server on localhost at port 8000
-app.listen(8000,()=>{
+app.listen(process.env.PORT||port,()=>{
     console.log('Running at port 8000')
 })
