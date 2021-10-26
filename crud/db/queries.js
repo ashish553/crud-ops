@@ -31,12 +31,12 @@ const getUsersById = (req,res)=>{
 }
 
 const createUser = (req,res)=>{
-    const { name,email } = req.body
-    pool.query('INSERT INTO users (name,email) VALUES ($1, $2)',[name,email],(err,results)=>{
+    const { projectname,sitename,siteurl,gender,normal,disruption,responsetime,availability,ssl,broken,dynamic } = req.body
+    pool.query('INSERT INTO users (projectname,sitename,gender,siteurl,normal,disruption,responsetime,availability,ssl,brokenlink,dynamic) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)',[projectname,sitename,gender,siteurl,parseInt(normal),parseInt(disruption),parseInt(responsetime),availability,ssl,broken,dynamic],(err,results)=>{
         if(err){
             throw err
         }
-        res.status(201).send(`User added with ID: ${name}`)
+        res.status(201).send(`User added with ID: ${projectname}`)
     })
 }
 
@@ -50,9 +50,21 @@ const deleteUser = (req,res) => {
     })
 }
 
+const updateUser = (req,res) => {
+    const {projectname,sitename,gender,id,siteurl,normal,disruption,responsetime,availability,ssl,broken,dynamic} = req.body
+    // const id = req.params
+    pool.query('UPDATE users SET projectname=$1, sitename=$2, gender=$3, siteurl=$4, normal=$6, disruption=$7, responsetime=$8, availability=$9, ssl=$10, brokenlink=$11, dynamic=$12 WHERE id=$5',[projectname,sitename,gender,siteurl,id,parseInt(normal),parseInt(disruption),parseInt(responsetime),availability,ssl,broken,dynamic],(err,results)=>{
+        if(err){
+            throw err
+        }
+        res.status(201).send('Update Successfull')
+    })
+}
+
 module.exports = {
     getUsers,
     getUsersById,
     createUser,
-    deleteUser
+    deleteUser,
+    updateUser
 }

@@ -4,6 +4,7 @@ const app = express()
 const bodyparser = require('body-parser')
 const query = require('./db/queries')
 const cors = require('cors')
+const port = 8000
 
 app.use(bodyparser.json())
 app.use(cors())
@@ -16,6 +17,7 @@ app.use(express.static(path.join(__dirname+'../my-app/public')))
 app.get('/api/users',query.getUsers)
 app.post('/api/user',query.createUser)
 app.delete('/api/user/:id',query.deleteUser)
+app.put('/api/user',query.updateUser)
 
 //Route for dashboard
 app.get('/',(req,res)=>{
@@ -23,6 +25,6 @@ app.get('/',(req,res)=>{
 })
 
 //Start server on localhost at port 8000
-app.listen(8000,()=>{
+app.listen(process.env.PORT||port,()=>{
     console.log('Running at port 8000')
 })
